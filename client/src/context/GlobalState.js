@@ -12,11 +12,20 @@ export const GlobalProvider = ({ children }) => {
 
     useEffect(() => {
         let url = "/getComments";
-        fetch(url).then((response) => {
-            console.log(response);
+        fetchData(url)
+    }, []);
+
+    const fetchData = (url) => {
+        fetch(url)
+        .then((response) => response.json())
+        .then(comments => {
+            dispatch({
+                type: 'FETCH_COMMENTS',
+                payload: comments
+            })
         })
         .catch((error) => console.log(error));
-    }, []);
+    }
 
     const addComment = (comment) => {
         dispatch({

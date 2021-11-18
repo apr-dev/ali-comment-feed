@@ -8,6 +8,10 @@ const reducer = (state, action) => {
          return {
                comments: state.comments.filter(comment => comment !== action.payload)
          }
+      case 'FETCH_COMMENTS':
+         return {
+               comments: [action.payload]
+         }
       default:
          return state;
    }
