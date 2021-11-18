@@ -28,10 +28,32 @@ export const GlobalProvider = ({ children }) => {
     }
 
     const addComment = (payload) => {
+        let url = "/createComment";
+        fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log('Success:', result);
+        })
+
         dispatch({
             type: 'ADD_COMMENT',
             payload
         });
+   }
+
+   const deleteComments = () => {
+    let url = "/deleteComments";
+        fetch(url, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log('Success:', result);
+        })
    }
   
     const removeComment = (comment) => {
@@ -46,7 +68,8 @@ export const GlobalProvider = ({ children }) => {
             value={{
                 comments: state.comments, 
                 addComment, 
-                removeComment
+                removeComment,
+                deleteComments
             }}
         > 
             {children} 

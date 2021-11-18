@@ -17,6 +17,11 @@ class CommentForm extends Component {
         }
     }
 
+    componentDidMount() {
+        // const { deleteComments } = this.context
+        // deleteComments()
+    }
+
     handleChange = (evt) => {
         const target = evt.target
         const name = target.name

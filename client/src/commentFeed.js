@@ -7,7 +7,7 @@ const CommentFeed = () => {
     return (
         <div>
             {
-                comments.map((card) => (<CommentCard card={card}/>))
+                comments.map((card, i) => (<CommentCard key={`${i}_card`} card={card}/>))
             }
         </div>
     )
