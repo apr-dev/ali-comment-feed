@@ -4,10 +4,11 @@ import { GlobalContext } from './context/GlobalState';
 
 const CommentFeed = () => {
     const { comments } = useContext(GlobalContext)
+    console.log(comments, '<-- what am i gtting for commts?')
     return (
         <div>
             {
-                comments.map((card) => (<CommentCard/>))
+                comments.map((card) => (<CommentCard card={card}/>))
             }
         </div>
     )

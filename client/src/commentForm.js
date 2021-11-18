@@ -3,14 +3,17 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import React, { Component } from 'react';
 import { GlobalContext } from './context/GlobalState';
+import { v4 as uuidv4 } from 'uuid';
 
 class CommentForm extends Component {
     static contextType = GlobalContext;
     constructor(props) {
         super(props)
         this.state = {
-            name: "",
-            comment: ""
+            id: null,
+            name: '',
+            message: '',
+            date: null,
         }
     }
 
@@ -21,12 +24,18 @@ class CommentForm extends Component {
     }
 
     submitComment = () => {
-        const { name, comment } = this.state
+        const { name, message } = this.state
         const { addComment } = this.context
+        const date = new Date().toLocaleString()
 
-        if (name.trim().length > 0 && comment.trim().length > 0) {
-            addComment({ name, comment })
-            this.setState({ name: '', comment: '' })
+        if (name.length > 0 && message.length > 0) {
+            addComment({ id: uuidv4(), name, message, date })
+            this.setState({ 
+                id: null, 
+                name: '', 
+                message: '', 
+                date: null 
+            })
         }
     }
 
@@ -60,7 +69,7 @@ class CommentForm extends Component {
                         fullWidth
                         variant="filled"
                         value={comment}
-                        name='comment'
+                        name='message'
                         onChange={this.handleChange}
                     />
                     </div>

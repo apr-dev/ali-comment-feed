@@ -1,4 +1,4 @@
-const reducer = (state, action) => {
+const Reducer = (state, action) => {
    switch(action.type) {
       case 'ADD_COMMENT':
          return {
@@ -10,11 +10,11 @@ const reducer = (state, action) => {
          }
       case 'FETCH_COMMENTS':
          return {
-               comments: [action.payload]
+               comments: action.payload
          }
       default:
          return state;
    }
 }
 
-export default reducer
+export default Reducer

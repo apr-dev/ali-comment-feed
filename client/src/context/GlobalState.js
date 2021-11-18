@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
-import AppReducer from './AppReducer';
+import Reducer from './AppReducer';
 
 const initialState = {
    comments : []
@@ -8,7 +8,7 @@ const initialState = {
 export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(AppReducer, initialState);
+    const [state, dispatch] = useReducer(Reducer, initialState);
 
     useEffect(() => {
         let url = "/getComments";
@@ -27,10 +27,10 @@ export const GlobalProvider = ({ children }) => {
         .catch((error) => console.log(error));
     }
 
-    const addComment = (comment) => {
+    const addComment = (payload) => {
         dispatch({
-           type: 'ADD_COMMENT',
-           payload: comment
+            type: 'ADD_COMMENT',
+            payload
         });
    }
   
