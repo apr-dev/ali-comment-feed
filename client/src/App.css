@@ -1,0 +1,22 @@
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #9CCFE7;
+  min-height: 100vh;
+}
+
+header {
+  margin-top: 20px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.text-field-container  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
