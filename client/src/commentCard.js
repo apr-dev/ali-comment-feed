@@ -14,7 +14,7 @@ const CommentCard = ({card}) => {
             </CardContent>
             <CardActions>
                 <Typography variant="body2">
-                   Comment by { card.name } on { card.date }
+                   Comment by { card.name } on { card.created }
                 </Typography>
             </CardActions>
         </Card>
