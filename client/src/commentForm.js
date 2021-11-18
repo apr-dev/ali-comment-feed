@@ -14,6 +14,8 @@ class CommentForm extends Component {
             name: '',
             message: '',
             date: null,
+            invalidName: false,
+            invalidMessage: false
         }
     }
 
@@ -33,7 +35,10 @@ class CommentForm extends Component {
         const { addComment } = this.context
         const date = new Date().toLocaleString()
 
-        if (name.length > 0 && message.length > 0) {
+        const isBlankMessage = message.trim().length === 0
+        const isBlankName = name.trim().length === 0
+
+        if (!isBlankMessage && !isBlankName) {
             addComment({ id: uuidv4(), name, message, created: date })
             this.setState({ 
                 id: null, 
@@ -41,11 +46,24 @@ class CommentForm extends Component {
                 message: '', 
                 date: null
             })
+        } else {
+            this.setState({ invalidName: isBlankName, invalidMessage: isBlankMessage })
+        }
+    }
+
+    handleOnFocus = (evt) => {
+        const { invalidMessage, invalidName } = this.state
+        const target = evt.target
+        const name = target.name
+        if (name === 'name') {
+            this.setState({ invalidName: false })
+        } else {
+            this.setState({ invalidMessage: false})
         }
     }
 
     render() {
-        const { name, message } = this.state
+        const { name, message, invalidMessage, invalidName } = this.state
         return (
             <>
                 <Box
@@ -63,6 +81,9 @@ class CommentForm extends Component {
                         name='name'
                         onChange={this.handleChange}
                         fullWidth
+                        error={invalidName}
+                        helperText={invalidName && "Please enter a valid name."}
+                        onFocus={this.handleOnFocus}
                     />
                     </div>
                     <div className="text-field-container">
@@ -76,6 +97,9 @@ class CommentForm extends Component {
                         value={message}
                         name='message'
                         onChange={this.handleChange}
+                        error={invalidMessage}
+                        helperText={invalidMessage && "Please enter a valid comment."}
+                        onFocus={this.handleOnFocus}
                     />
                     </div>
                 </Box>
