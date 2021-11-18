@@ -34,12 +34,12 @@ class CommentForm extends Component {
         const date = new Date().toLocaleString()
 
         if (name.length > 0 && message.length > 0) {
-            addComment({ id: uuidv4(), name, message, date })
+            addComment({ id: uuidv4(), name, message, created: date })
             this.setState({ 
                 id: null, 
                 name: '', 
                 message: '', 
-                date: null 
+                date: null
             })
         }
     }
