@@ -4,7 +4,6 @@ import { GlobalContext } from './context/GlobalState';
 
 const CommentFeed = () => {
     const { comments } = useContext(GlobalContext)
-    console.log(comments, '<-- what am i gtting for commts?')
     return (
         <div>
             {

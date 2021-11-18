@@ -40,7 +40,7 @@ class CommentForm extends Component {
     }
 
     render() {
-        const { name, comment } = this.state
+        const { name, message } = this.state
         return (
             <>
                 <Box
@@ -68,7 +68,7 @@ class CommentForm extends Component {
                         rows={6}
                         fullWidth
                         variant="filled"
-                        value={comment}
+                        value={message}
                         name='message'
                         onChange={this.handleChange}
                     />
