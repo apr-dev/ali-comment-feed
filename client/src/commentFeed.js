@@ -1,24 +1,17 @@
-import React, { Component } from 'react';
-import CommentCard from './commentCard'
+import React, { useContext } from 'react';
+import CommentCard from './commentCard';
+import { GlobalContext } from './context/GlobalState';
 
-class CommentFeed extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            feedItems: [{}, {}, {}]
-        }
-    }
-
-    render() {
-        const { feedItems } = this.state
-        return (
-            <div>
-                {
-                    feedItems.map((card) => (<CommentCard/>))
-                }
-            </div>
-        )
-    }
+const CommentFeed = () => {
+    const { comments } = useContext(GlobalContext)
+    return (
+        <div>
+            {
+                comments.map((card) => (<CommentCard/>))
+            }
+        </div>
+    )
+    
 }
 
 export default CommentFeed;
