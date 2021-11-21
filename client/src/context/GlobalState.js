@@ -19,9 +19,12 @@ export const GlobalProvider = ({ children }) => {
         fetch(url)
         .then((response) => response.json())
         .then(comments => {
+            let sorted = comments.sort((a, b) => {
+                return new Date(b.created) - new Date(a.created)
+            })
             dispatch({
                 type: 'FETCH_COMMENTS',
-                payload: comments
+                payload: sorted
             })
         })
         .catch((error) => console.log(error));
