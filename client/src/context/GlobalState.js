@@ -1,5 +1,6 @@
-import { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import Reducer from './AppReducer';
+import { io } from "socket.io-client";
 
 const initialState = {
    comments : []
@@ -31,6 +32,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     const addComment = (payload) => {
+        let socket = io.connect('http://localhost:3001')
         let url = "/createComment";
         fetch(url, {
             method: 'POST',
@@ -42,11 +44,15 @@ export const GlobalProvider = ({ children }) => {
             console.log('Success:', result);
         })
 
+        socket.emit("new_message", { message: payload });
+   }
+
+   const dispatchAddComment = (payload) => {
         dispatch({
             type: 'ADD_COMMENT',
             payload
-        });
-   }
+        });   
+    }
 
    const deleteComments = () => {
     let url = "/deleteComments";
@@ -70,7 +76,8 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider 
             value={{
                 comments: state.comments, 
-                addComment, 
+                addComment,
+                dispatchAddComment,
                 removeComment,
                 deleteComments
             }}

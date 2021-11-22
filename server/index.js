@@ -7,6 +7,15 @@ const Comment = require('./comment');
 const app = express();
 const port = process.env.PORT || 3001;
 
+const http = require('http');
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "DELETE"]
+  }
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -44,7 +53,14 @@ app.delete('/deleteComments', function(request, response) {
   });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+io.on('connection', (socket) => {
+  console.log('a user connected', socket.id);
+  socket.on("new_message", (data) => {
+    socket.broadcast.emit("new_message", { message: data.message })
+  });
+})
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(express.static('public'));
 

@@ -6,6 +6,7 @@ import { GlobalProvider } from './context/GlobalState'
 import Typography from '@mui/material/Typography';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">

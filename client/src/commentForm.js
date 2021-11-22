@@ -52,7 +52,6 @@ class CommentForm extends Component {
     }
 
     handleOnFocus = (evt) => {
-        const { invalidMessage, invalidName } = this.state
         const target = evt.target
         const name = target.name
         if (name === 'name') {
