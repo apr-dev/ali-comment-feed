@@ -11,7 +11,7 @@ const CommentFeed = () => {
         socket.on("new_message", (data) => {
             dispatchAddComment(data.message)
         });
-    }, [])
+    }, [dispatchAddComment])
     
     return (
         <div>

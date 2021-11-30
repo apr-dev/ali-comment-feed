@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useCallback } from 'react';
 import Reducer from './AppReducer';
 import { io } from "socket.io-client";
 
@@ -47,12 +47,12 @@ export const GlobalProvider = ({ children }) => {
         socket.emit("new_message", { message: payload });
    }
 
-   const dispatchAddComment = (payload) => {
+    const dispatchAddComment = useCallback((payload) => {
         dispatch({
             type: 'ADD_COMMENT',
             payload
         });   
-    }
+    }, [])
 
    const deleteComments = () => {
     let url = "/deleteComments";
